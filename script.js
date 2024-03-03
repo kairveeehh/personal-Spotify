@@ -71,7 +71,7 @@ const playMusic = (track, pause = false) => {
 
 async function displayAlbums() {
     console.log("hey");
-    let a = await fetch(`personal-Spotify/songs/`)
+    let a = await fetch(`/songs/`)
     console.log(a);
     let response = await a.text();
     let div = document.createElement("div")
@@ -84,7 +84,7 @@ async function displayAlbums() {
         if (e.href.includes("/songs/") ) {
             let folder = e.href.split("/").slice(-2)[1];
             console.log(folder);
-            let a = await fetch(`personal-Spotify/songs/${folder}/info.json`)
+            let a = await fetch(`/songs/${folder}/info.json`)
             console.log(a);
             let response = await a.json(); 
             console.log(response);
@@ -99,7 +99,7 @@ async function displayAlbums() {
                  </div>
      
              </div>
-             <img src ="personal-Spotify/songs/${folder}/cover.jpeg" alt="">
+             <img src ="/songs/${folder}/cover.jpeg" alt="">
              <h2>${response.title}</h2>
              <p>${response.description}</p>
          </div> `
@@ -111,7 +111,7 @@ async function displayAlbums() {
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
             console.log("Fetching Songs")
-            songs = await getSongs(`personal-Spotify/songs/${item.currentTarget.dataset.folder}`)
+            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
 
 
 
